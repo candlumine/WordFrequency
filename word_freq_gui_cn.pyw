@@ -140,14 +140,14 @@ def export_csv():
 	导出csv文件
 	"""
 	import os,csv
-	from tkinter import filedialog,messagebox
-	global datadict
+	from tkinter import messagebox
+	global datadict,outpath
 	with open(outpath,'w',newline='') as csvfile:
 		writer = csv.DictWriter(csvfile,fieldnames=['词语','频率'])
 		writer.writeheader()
 		for k,v in datadict:
 			writer.writerow({'词语':k,'频率':v})
-	messagebox.showinfo("","已经导出到{}".format(path))
+	messagebox.showinfo("","已经导出到{}".format(outpath))
 
 if '__main__' == __name__:
 	import tkinter as tk
@@ -180,7 +180,7 @@ if '__main__' == __name__:
 	mode2_chk = tk.StringVar()
 	mode2_btn = ttk.Combobox(root, textvariable=mode2_chk, state='readonly')
 	mode2_btn.grid(row=4,column=0)
-	mode2_btn['values'] = ("次数排名超过", "次数最低值为")
+	mode2_btn['values'] = ("排名超过", "次数高于")
 	mode2_btn.current(0)
 	mode2 = mode2_btn.get()
 	mode2_k = tk.StringVar()
